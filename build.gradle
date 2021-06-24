@@ -12,7 +12,10 @@ repositories {
 dependencies {
     implementation(
         'org.seleniumhq.selenium:selenium-java:3.141.59',
-        'io.github.bonigarcia:webdrivermanager:4.4.3'
+        'io.github.bonigarcia:webdrivermanager:4.4.3',
+            'junit:junit:4.13.2'
+
+
 
     )
 }
