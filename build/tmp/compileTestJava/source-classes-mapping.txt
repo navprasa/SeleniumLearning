@@ -1,2 +1,8 @@
 J5.java
  J5
+pages/HomePage.java
+ pages.HomePage
+pages/Webpage.java
+ pages.Webpage
+pages/SearchResultsPage.java
+ pages.SearchResultsPage

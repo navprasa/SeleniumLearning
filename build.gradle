@@ -17,7 +17,7 @@ dependencies {
     implementation(
         'org.seleniumhq.selenium:selenium-java:3.141.59',
         'io.github.bonigarcia:webdrivermanager:4.4.3',
-            'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+            'org.junit.jupiter:junit-jupiter-engine:5.8.0-M1'
 
 
 

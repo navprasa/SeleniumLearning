@@ -8,6 +8,8 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import pages.HomePage;
+import pages.SearchResultsPage;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -16,7 +18,7 @@ import java.util.stream.Collectors;
 public class J5 {
 
     private static WebDriver driver;
-
+    private static final String searchText = "selenium";
     @BeforeAll
     public  static void loaddriver(){
         WebDriverManager.chromedriver().setup();
@@ -29,22 +31,14 @@ public class J5 {
 
         driver.get("https://www.github.com");
 
-        String searchPhrase = "selenium";
-        WebElement Search = driver.findElement(By.cssSelector("[name='q']"));
-        Search.sendKeys(searchPhrase);
-        Search.sendKeys(Keys.ENTER);
+        HomePage homepage = new HomePage(driver);
+        SearchResultsPage searchResultsPage = new SearchResultsPage(driver);
 
+        homepage.performsearch(searchText);
 
-        List<String> actualItems = driver.findElements(By.xpath("//ul[@class='repo-list']")).stream()
-                .map(element->element.getText().toLowerCase())
-                .collect(Collectors.toList());
+        List<String> actualItems = searchResultsPage.searchResultsItemsText();
+        List<String> expectedItems = searchResultsPage.searchResultsItemsWithText(searchText);
 
-        //Assert.assertTrue(actualItems.stream().allMatch(items->items.matches(searchPhrase)));
-
-        List<String> expectedItems = actualItems.stream()
-                .filter(item->item.contains("asdfkja"))
-                .collect(Collectors.toList());
-        System.out.println(expectedItems);
         Assertions.assertEquals(expectedItems,actualItems);
 
     }
