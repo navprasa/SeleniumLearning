@@ -1,5 +1,8 @@
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -9,12 +12,21 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class SeleniumRunner {
 
-    public static void main(String args[]){
+public class J5 {
+
+    private static WebDriver driver;
+
+    @BeforeAll
+    public  static void loaddriver(){
         WebDriverManager.chromedriver().setup();
-        WebDriver driver = new ChromeDriver();
+        driver = new ChromeDriver();
         driver.manage().window().maximize();
+    }
+
+    @Test
+    public void checkS(){
+
         driver.get("https://www.github.com");
 
         String searchPhrase = "selenium";
@@ -30,11 +42,15 @@ public class SeleniumRunner {
         //Assert.assertTrue(actualItems.stream().allMatch(items->items.matches(searchPhrase)));
 
         List<String> expectedItems = actualItems.stream()
-                .filter(item->item.contains("Invalid search phrase"))
+                .filter(item->item.contains("asdfkja"))
                 .collect(Collectors.toList());
         System.out.println(expectedItems);
         Assertions.assertEquals(expectedItems,actualItems);
 
+    }
+
+    @AfterAll
+    public static void teardown(){
         driver.close();
     }
 }
